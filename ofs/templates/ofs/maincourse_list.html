@@ -1,0 +1,81 @@
+{% extends 'ofs/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+{% block content %}
+
+    <html>
+    <body>
+    <style>
+        body {
+            backgroundi: white;
+        }
+    </style>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-primary">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h2 style="padding-left: 15Px">Main Course</h2>
+    </div>
+    <div>
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr class="bg-info">
+                <th>Item Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th colspan="3">Cart</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in maincourses %}
+                <tr>
+                    <td>{{ item.item_name }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.price }}</td>
+                    <td><a href="{% url 'ofs:checkout'%}"
+                       onclick="return cart"
+                       class="btn btn-danger">Add to Cart</a>
+                    </td>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>>
+    </body>
+    </html>
+{% endblock %}
+</html>
+{% block js %}
+<script>
+    console.log('working');
+    if (localStorage.getItem('cart') == null) {
+        var cart = {};
+    }
+    else {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        document.getElementById('cart').innerHTML = Object.keys(cart).length;
+    }
+    $('.cart').click(function () {
+        console.log('clicked');
+        var idstr = this.id.toString();
+        console.log(idstr);
+        if (cart[idstr] != undefined) {
+            cart[idstr] = cart[idstr] + 1;
+        }
+        else {
+            cart[idstr] = 1;
+        }
+        console.log(cart);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById('cart').innerHTML = Object.keys(cart).length;
+    });
+    $('#popcart').popover()
+
+    document.getElementById("popcart").setAttribute('data-content', '<h6>Cart for your items in my shopping cart</h6>');
+</script>
+{% endblock %}

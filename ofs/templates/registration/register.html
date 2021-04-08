@@ -1,0 +1,19 @@
+{% extends 'ofs/base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container my-4">
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 border rounded">
+        <h2 class="my-3">Registration</h2>
+    <form method="POST">
+         {% csrf_token %}
+         {{form | crispy}}
+         <button type="submit" class="btn btn-primary mb-3">Register</button>
+    </form>
+</div>
+</div>
+</div>
+{% endblock %}

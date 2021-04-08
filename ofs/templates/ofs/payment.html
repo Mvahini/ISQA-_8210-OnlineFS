@@ -1,0 +1,13 @@
+{% extends 'ofs/base.html' %}
+
+{% block title%} Payment {% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="my-4">
+{#        {% for order_id in o_id|slice:":1" %}#}
+        <h1>Your order has been placed and the order id is <strong class="text-primary">{{o_id}}</strong></h1>
+{#        {% endfor %}#}
+    </div>
+</div>
+{% endblock %}

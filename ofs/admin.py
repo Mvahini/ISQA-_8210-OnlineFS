@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Customer,Appetizer,Salad,Dessert,OrderDetail,Payment
+from .models import Customer,OrderDetail,Payment, Item
 
 class CustomerList(admin.ModelAdmin):
     list_display = ( 'cust_name', 'email', 'phone_number' )
@@ -11,32 +11,9 @@ class CustomerList(admin.ModelAdmin):
 
 admin.site.register(Customer)
 
-class AppetizerList(admin.ModelAdmin):
-    list_display = ( 'appetizer_name', 'description', 'price' )
-    list_filter = ( 'appetizer_name', 'description')
-    search_fields = ('appetizer_name', )
-    ordering = ['appetizer_name']
 
 
-admin.site.register(Appetizer)
-
-class SaladList(admin.ModelAdmin):
-    list_display = ( 'salad_name', 'description', 'price' )
-    list_filter = ( 'salad_name', 'description')
-    search_fields = ('salad_name', )
-    ordering = ['salad_name']
-
-
-admin.site.register(Salad)
-
-class DessertList(admin.ModelAdmin):
-    list_display = ( 'dessert_name', 'description', 'price' )
-    list_filter = ( 'dessert_name', 'description')
-    search_fields = ('dessert_name', )
-    ordering = ['dessert_name']
-
-
-admin.site.register(Dessert)
+admin.site.register(Item)
 
 class OrderDetailtList(admin.ModelAdmin):
     list_display = ( 'Customer', 'order_status')
@@ -55,3 +32,4 @@ class PaymentList(admin.ModelAdmin):
 
 
 admin.site.register(Payment)
+

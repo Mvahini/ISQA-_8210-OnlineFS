@@ -15,35 +15,30 @@ class Customer(models.Model):
     def __str__(self):
         return str(self.cust_name)
 
-# Create your models here.
-class Appetizer(models.Model):
-    appetizer_name = models.CharField(max_length=50)
+
+# class Itemtype(models.Model):
+#     item_type = models.CharField(max_length=20)
+#
+#     def __str__(self):
+#         return str(self.item_type)
+choice = (
+    ('maincourse', 'MAINCOURSE'),
+    ('appetizer','APPETIZER'),
+    ('salad','SALAD'),
+    ('desserts', 'DESSERTS'),
+    ('beverage','BEVERAGE'),
+)
+
+class Item(models.Model):
+    #item_type = models.ForeignKey(Itemtype, on_delete=models.CASCADE)
+    item_type= models.CharField(max_length=30, choices=choice, null=False)
+    item_name = models.CharField(max_length=50)
     description = models.CharField(max_length=100, blank=True)
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    created_date = models.DateField(default=timezone.now)
 
     def __str__(self):
-        return str(self.appetizer_name)
-
-
-# Create your models here.
-class Salad(models.Model):
-    salad_name = models.CharField(max_length=50)
-    description = models.CharField(max_length=100, blank=True)
-    price = models.FloatField()
-
-    def __str__(self):
-        return str(self.salad_name)
-
-
-# Create your models here.
-class Dessert(models.Model):
-    dessert_name = models.CharField(max_length=50)
-    description = models.CharField(max_length=100, blank=True)
-    price = models.FloatField()
-
-    def __str__(self):
-        return str(self.dessert_name)
-
+        return str(self.item_name)
 
 
 
@@ -65,3 +60,6 @@ class Payment(models.Model):
 
    def __str__(self):
        return str(self.Customer)
+
+
+
